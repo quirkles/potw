@@ -1,0 +1,33 @@
+<div id="login-page">
+  <div class="grid-container">
+    <div class="grid-x grid-padding-x">
+      <div class="medium-6 medium-offset-3 cell">
+        <h2>
+          <span>Login</span>
+        </h2>
+        <form>
+          <div>
+            <div class="medium-12 cell">
+              <label>
+                <span>Username</span>
+                <label for="firstname">First Name</label>
+                <Input @type="text" @value={{@model.username}} name="username" placeholder="username" autocomplete="username" />
+              </label>
+            </div>
+            <div class="medium-12 cell">
+              <label>
+                <span>Password</span>
+                <Input @type="password" @value={{@model.password}} name="password" placeholder="xxxxxx" autocomplete="new-password" />
+              </label>
+            </div>
+          </div>
+          <button type="button" {{on "click" this.submit}}>Log In</button>
+        </form>
+        {{#if this.shouldShowErrorBox}}
+          <ErrorBox @errors={{@model.signupErrors}} />
+        {{/if}}
+        <div class="redirect"><span>New around here? <LinkTo @route="signup">sign up</LinkTo></span></div>
+      </div>
+    </div>
+  </div>
+</div>

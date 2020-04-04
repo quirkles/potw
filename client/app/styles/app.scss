@@ -1,0 +1,36 @@
+@import 'settings';
+@import 'foundation';
+
+// Mixins
+@import "mixins";
+
+//Templates
+@import "signup";
+@import "login";
+@import "admin";
+//Components
+@import "errorBox";
+
+html {
+  height: 100%;
+  body {
+    height: 100%;
+    &.ember-application {
+      > div{
+        height: 100%;
+      }
+    }
+    button {
+      cursor: pointer;
+      padding: 0.8rem;
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: bold;
+      color: #c2c2c2;
+      background: rgba(0, 0, 0, 1);
+      &:hover{
+        background: rgba(25, 25, 25, 1);
+      }
+    }
+  }
+}
