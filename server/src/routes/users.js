@@ -1,5 +1,3 @@
-import passport from 'passport';
-
 import {
   createUser,
   attemptLogin,

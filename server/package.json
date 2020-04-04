@@ -4,7 +4,8 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "migrate": "~/Downloads/flyway-6.2.4/flyway -configFiles=flyway.conf -locations=filesystem:migrations migrate"
+    "migrate": "~/Downloads/flyway-6.2.4/flyway -configFiles=flyway.conf -locations=filesystem:migrations migrate",
+    "dev": "nodemon -r @babel/register src/index.js"
   },
   "keywords": [],
   "author": "",
