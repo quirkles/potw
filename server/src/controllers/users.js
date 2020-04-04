@@ -1,37 +1,45 @@
 import { omit } from 'ramda';
 import { sign } from 'jsonwebtoken';
 
-import { user as userModel } from '../models';
 import { encrypt } from '../encrypt';
 import { JWT_SECRET } from '../secrets';
 
 const userToToken = omit(['password', 'confirm-password']);
 
-export const findUserById = (req, res) => {
-  userModel.findOne({
-    where: {
-      id: req.params.userId,
-    },
-  })
-    .then((foundUserModel) => {
-      if (foundUserModel) {
-        const userData = userToToken(foundUserModel.toJSON());
-        return res.json({
-          data: {
-            id: userData.id,
-            type: 'user',
-            attributes: userData,
-          },
-        });
-      }
-      const err = new Error(`No user found for id: ${req.params.userId},}`);
-      err.code = 404;
-      return res.status(404).send([err]);
+export const findUserById = (userModel) => (req, res) => {
+  try {
+    userModel.findOne({
+      where: {
+        id: req.params.userId,
+      },
+      include: 'user_role',
     })
-    .catch((err) => res.status(500).send(err.errors));
+      .then((foundUserModel) => {
+        if (foundUserModel) {
+          const userData = userToToken(foundUserModel.toJSON());
+          return res.json({
+            data: {
+              id: userData.id,
+              type: 'user',
+              attributes: userData,
+            },
+          });
+        }
+        const err = new Error(`No user found for id: ${req.params.userId},}`);
+        err.code = 404;
+        return res.status(404).send([err]);
+      })
+      .catch((err) => {
+        console.log("#####", err) //eslint-disable-line
+        res.status(500).send(err.errors);
+      });
+  } catch (e) {
+    console.log("#####", e) //eslint-disable-line
+    res.status(500).send(e);
+  }
 };
 
-export const createUser = (req, res) => {
+export const createUser = (userModel) => (req, res) => {
   const userData = req.body.data.attributes;
   userData.password = encrypt(userData.password);
   userModel.create(userData)
@@ -54,7 +62,7 @@ export const createUser = (req, res) => {
     });
 };
 
-export const attemptLogin = (req, res) => {
+export const attemptLogin = (userModel) => (req, res) => {
   const postedCreds = req.body.data.attributes;
   const { username, password = '' } = postedCreds;
   const encryptedPassword = encrypt(password);

@@ -1,13 +1,6 @@
-import { Model, STRING, UUID } from 'sequelize';
+import { STRING, UUID } from 'sequelize';
 
-import { DB_CONNECTION_STRING } from '../secrets';
-
-import getDbConnection from '../getDatabaseConnection';
-
-const sequelize = getDbConnection(DB_CONNECTION_STRING);
-
-class User extends Model {}
-User.init({
+export default (sequelize) => sequelize.define('user', {
   id: {
     type: UUID,
     primaryKey: true,
@@ -24,11 +17,15 @@ User.init({
     type: STRING,
     allowNull: false,
   },
+  userRoleId: {
+    type: UUID,
+    references: {
+      model: 'user_role',
+      key: 'id',
+    },
+  },
 }, {
-  sequelize,
-  modelName: 'user',
   createdAt: 'created_at',
   updatedAt: 'updated_at',
+  underscored: true,
 });
-
-export default User;

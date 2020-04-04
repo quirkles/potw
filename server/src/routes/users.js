@@ -4,8 +4,9 @@ import {
   findUserById,
 } from '../controllers';
 
-export default (app) => {
-  app.post('/users', createUser);
-  app.post('/login', attemptLogin);
-  app.get('/users/:userId', findUserById);
+export default (app, models) => {
+  const { userModel } = models;
+  app.post('/users', createUser(userModel));
+  app.post('/login', attemptLogin(userModel));
+  app.get('/users/:userId', findUserById(userModel));
 };

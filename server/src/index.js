@@ -3,6 +3,8 @@ import express from 'express';
 import getDatabaseConnection from './getDatabaseConnection';
 
 import initRoutes from './routes';
+import initModels from './models';
+
 import { initPassport } from './authentication';
 
 import { DB_CONNECTION_STRING } from './secrets';
@@ -24,14 +26,16 @@ app.use((req, res, next) => {
   next();
 });
 
-initRoutes(app, passport);
 
-getDatabaseConnection(DB_CONNECTION_STRING)
+const sequelizeInstance = getDatabaseConnection(DB_CONNECTION_STRING);
+
+sequelizeInstance
   .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
+    const models = initModels(sequelizeInstance);
+    initRoutes(app, models);
   })
-
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   });

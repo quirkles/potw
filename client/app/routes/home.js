@@ -1,13 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
-const decodeJwt = (token) => {
-  try {
-    return JSON.parse(atob(token.split('.')[1]));
-  } catch (e) {
-    return null;
-  }
-};
+import { decodeJwt } from '../utils';
 
 export default class LoginRoute extends Route {
   @service store;
@@ -23,12 +17,10 @@ export default class LoginRoute extends Route {
         console.log("Fetching user");
         return this.store.findRecord('user', id)
           .then(user => {
-            console.log("USER FOUND:", user);
             if (user) {
               return user
             }
-            console.log("NO USER FOUND")
-              // return this.transitionTo('login')
+            return this.transitionTo('login')
           })
           .catch((err) => {
             const errStatus = err.errors[0].status;
@@ -38,8 +30,7 @@ export default class LoginRoute extends Route {
           })
       }
     } else {
-      console.log("NO JWT")
-      // return this.transitionTo('login')
+      return this.transitionTo('login')
     }
   }
 }
