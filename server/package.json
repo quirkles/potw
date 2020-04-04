@@ -5,7 +5,9 @@
   "main": ".eslintrc.js",
   "scripts": {
     "migrate": "~/Downloads/flyway-6.2.4/flyway -configFiles=flyway.conf -locations=filesystem:migrations migrate",
-    "dev": "nodemon -r @babel/register src/index.js"
+    "dev": "nodemon -r @babel/register src/index.js",
+    "prettier:fix": "prettier src --write",
+    "prettier:check": "prettier src"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +21,6 @@
     "pg-hstore": "^2.3.3",
     "ramda": "^0.27.0",
     "sequelize": "^5.21.5"
-  }
+  },
+  "devDependencies": {}
 }

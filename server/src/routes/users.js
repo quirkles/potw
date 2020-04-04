@@ -1,8 +1,4 @@
-import {
-  createUser,
-  attemptLogin,
-  findUserById,
-} from '../controllers';
+import { createUser, attemptLogin, findUserById } from '../controllers';
 
 export default (app, models) => {
   const { userModel } = models;

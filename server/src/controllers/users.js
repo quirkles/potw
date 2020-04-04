@@ -8,12 +8,13 @@ const userToToken = omit(['password', 'confirm-password']);
 
 export const findUserById = (userModel) => (req, res) => {
   try {
-    userModel.findOne({
-      where: {
-        id: req.params.userId,
-      },
-      include: 'user_role',
-    })
+    userModel
+      .findOne({
+        where: {
+          id: req.params.userId,
+        },
+        include: 'user_role',
+      })
       .then((foundUserModel) => {
         if (foundUserModel) {
           const userData = userToToken(foundUserModel.toJSON());
@@ -30,11 +31,11 @@ export const findUserById = (userModel) => (req, res) => {
         return res.status(404).send([err]);
       })
       .catch((err) => {
-        console.log("#####", err) //eslint-disable-line
+        console.log("#####", err); //eslint-disable-line
         res.status(500).send(err.errors);
       });
   } catch (e) {
-    console.log("#####", e) //eslint-disable-line
+    console.log("#####", e); //eslint-disable-line
     res.status(500).send(e);
   }
 };
@@ -42,7 +43,8 @@ export const findUserById = (userModel) => (req, res) => {
 export const createUser = (userModel) => (req, res) => {
   const userData = req.body.data.attributes;
   userData.password = encrypt(userData.password);
-  userModel.create(userData)
+  userModel
+    .create(userData)
     .then((createdUser) => {
       const response = userToToken(createdUser.toJSON());
       const { username: user, id } = response;
@@ -66,12 +68,13 @@ export const attemptLogin = (userModel) => (req, res) => {
   const postedCreds = req.body.data.attributes;
   const { username, password = '' } = postedCreds;
   const encryptedPassword = encrypt(password);
-  userModel.findOne({
-    where: {
-      username,
-      password: encryptedPassword,
-    },
-  })
+  userModel
+    .findOne({
+      where: {
+        username,
+        password: encryptedPassword,
+      },
+    })
     .then((foundUserModel) => {
       const userData = userToToken(foundUserModel.toJSON());
       const { username: user, id } = userData;
