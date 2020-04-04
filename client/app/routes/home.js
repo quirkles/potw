@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 const decodeJwt = (token) => {
   try {
@@ -9,6 +10,7 @@ const decodeJwt = (token) => {
 };
 
 export default class LoginRoute extends Route {
+  @service store;
   model() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
@@ -18,15 +20,22 @@ export default class LoginRoute extends Route {
       if (model) {
         return model
       } else {
-        this.store.findRecord('user', id)
+        console.log("Fetching user");
+        return this.store.findRecord('user', id)
           .then(user => {
+            console.log("USER FOUND:", user);
             if (user) {
               return user
             }
             console.log("NO USER FOUND")
               // return this.transitionTo('login')
           })
-          .catch((err) => console.log("Problem fetching user:", err));
+          .catch((err) => {
+            const errStatus = err.errors[0].status;
+            if (errStatus === "404") {
+              return this.transitionTo('signup')
+            }
+          })
       }
     } else {
       console.log("NO JWT")

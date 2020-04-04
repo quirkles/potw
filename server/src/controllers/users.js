@@ -14,15 +14,21 @@ export const findUserById = (req, res) => {
     },
   })
     .then((foundUserModel) => {
-      const userData = userToToken(foundUserModel.toJSON());
-      return res.json({
-        data: {
-          id: userData.id,
-          type: 'user',
-          attributes: userData,
-        },
-      });
-    });
+      if (foundUserModel) {
+        const userData = userToToken(foundUserModel.toJSON());
+        return res.json({
+          data: {
+            id: userData.id,
+            type: 'user',
+            attributes: userData,
+          },
+        });
+      }
+      const err = new Error(`No user found for id: ${req.params.userId},}`);
+      err.code = 404;
+      return res.status(404).send([err]);
+    })
+    .catch((err) => res.status(500).send(err.errors));
 };
 
 export const createUser = (req, res) => {
