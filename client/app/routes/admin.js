@@ -12,7 +12,6 @@ export default class LoginRoute extends Route {
       if (model) {
         return model
       } else {
-        console.log("Fetching user");
         return this.store.findRecord('user', id)
           .then(user => {
             if (user) {

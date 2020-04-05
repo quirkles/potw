@@ -10,5 +10,7 @@ Router.map(function() {
   this.route('login');
   this.route('signup');
   this.route('home');
-  this.route('admin');
+  this.route('admin', function() {
+    this.route('games');
+  });
 });

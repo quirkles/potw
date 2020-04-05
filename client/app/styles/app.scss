@@ -1,5 +1,5 @@
 @import 'settings';
-@import 'foundation';
+@import 'app/styles/foundation_config';
 
 // Mixins
 @import "mixins";
@@ -9,8 +9,10 @@
 @import "login";
 @import "admin";
 @import "home";
+
 //Components
 @import "errorBox";
+@import "admin-sidebar";
 
 html {
   height: 100%;
