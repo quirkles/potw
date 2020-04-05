@@ -1,5 +1,5 @@
 import initUserModel from './user';
-import initRoleModel from './user_role';
+import initRoleModel from './userRole';
 
 let models;
 

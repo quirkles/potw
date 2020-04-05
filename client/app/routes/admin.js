@@ -16,14 +16,21 @@ export default class LoginRoute extends Route {
         return this.store.findRecord('user', id)
           .then(user => {
             if (user) {
-              return user
+              if(user.userRole.name === 'site_admin') {
+                return user
+              }
+              return this.transitionTo('home')
             }
             return this.transitionTo('login')
           })
           .catch((err) => {
-            const errStatus = err.errors[0].status;
-            if (errStatus === "404") {
-              return this.transitionTo('signup')
+            if (err.errors) {
+              const errStatus = err.errors[0].status;
+              if (errStatus === "404") {
+                return this.transitionTo('signup')
+              }
+            } else {
+              console.log('Error:', err)
             }
           })
       }

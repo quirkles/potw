@@ -20,6 +20,9 @@ export default class user extends Model {
   @attr('string') email;
   @attr('string') password;
   @attr('string') confirmPassword;
+  @attr('string') createdAt;
+  @attr('string') updatedAt;
+  @attr userRole;
 
   attemptLogin() {
     return fetch(`${host}/login`, {

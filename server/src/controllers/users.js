@@ -13,7 +13,7 @@ export const findUserById = (userModel) => (req, res) => {
         where: {
           id: req.params.userId,
         },
-        include: 'user_role',
+        include: 'userRole',
       })
       .then((foundUserModel) => {
         if (foundUserModel) {

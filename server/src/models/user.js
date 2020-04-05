@@ -28,8 +28,6 @@ export default (sequelize) => sequelize.define(
     },
   },
   {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
     underscored: true,
   },
 );
