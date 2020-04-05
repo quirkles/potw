@@ -1,7 +1,9 @@
 import express from 'express';
+import { uuid } from 'uuidv4';
 
 import getDatabaseConnection from './getDatabaseConnection';
 
+import logger from './logger';
 import initRoutes from './routes';
 import initModels from './models';
 
@@ -30,18 +32,28 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  req.logger = logger.child({
+    requestId: uuid(),
+    requestMethod: req.method,
+    requestUrl: req.url,
+  });
+  req.logger.info('Received request.');
+  next();
+});
+
 const sequelizeInstance = getDatabaseConnection(DB_CONNECTION_STRING);
 
 sequelizeInstance
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    logger.info('Connection has been established successfully.');
     const models = initModels(sequelizeInstance);
     initRoutes(app, models);
   })
   .catch((err) => {
-    console.error('Unable to connect to the database:', err);
+    logger.error('Unable to connect to the database:', err);
   });
 
 app.listen(port);
-console.log(`Server litening on port ${port}`);
+logger.info(`Server litening on port ${port}`);
