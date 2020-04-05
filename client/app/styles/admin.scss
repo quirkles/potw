@@ -1,4 +1,13 @@
 #admin-page {
   background: url(../assets/img/bg-purple.jpg);
   display: flex;
+  .admin-content-wrapper {
+    padding: 1rem;
+    h1 {
+      padding: 1rem;
+      background: $white;
+    }
+    .games {
+    }
+  }
 }
