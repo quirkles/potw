@@ -13,4 +13,5 @@ Router.map(function() {
   this.route('admin', function() {
     this.route('games');
   });
+  this.route('not-found', { path: '/*path' })
 });
