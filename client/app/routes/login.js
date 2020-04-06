@@ -7,10 +7,6 @@ export default class LoginRoute extends Route {
     }
     return this.store.createRecord('user', {
       id: 'unauthenticated-user',
-      username: 'quirkles',
-      email: 'al.quirk@email.com',
-      password: 'password',
-      confirmPassword: 'password',
     })
   }
 }
