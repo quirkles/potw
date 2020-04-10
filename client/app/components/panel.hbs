@@ -1,0 +1,10 @@
+<div class="card">
+  {{#if @title}}
+    <div class="card-divider">
+      {{@title}}
+    </div>
+  {{/if}}
+  <div class="card-section">
+    {{yield}}
+  </div>
+</div>
