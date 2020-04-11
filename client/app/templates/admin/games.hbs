@@ -4,14 +4,20 @@
       <div class="small-12 cell">
         <h1>GAMES</h1>
       </div>
-      <div class="medium-8 cell">
+      <div class="medium-7 cell">
         <Panel @title="My games">
           <div>
-            games list
+            {{#if this.model.existingGames.length}}
+              games list
+            {{else}}
+              <h2>You aren't in any games right now!</h2>
+              <br>
+              <button class="hollow button success button-large">Create Game</button>
+            {{/if}}
           </div>
         </Panel>
       </div>
-      <div class="medium-4 cell">
+      <div class="medium-5 cell">
         <Panel @title="Create new game">
           <div>
             new game form
