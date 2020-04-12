@@ -1,0 +1,11 @@
+<Panel @title="My games">
+  <div>
+    {{#if this.model.existingGames.length}}
+      games list
+    {{else}}
+      <h2>You aren't in any games right now!</h2>
+      <br>
+      <LinkTo @route="admin.games.new" class="hollow button success button-large">Create Game</LinkTo>
+    {{/if}}
+  </div>
+</Panel>

@@ -11,7 +11,10 @@ Router.map(function() {
   this.route('signup');
   this.route('home');
   this.route('admin', function() {
-    this.route('games');
+    this.route('games', function() {
+      this.route('new');
+      this.route('list');
+    });
   });
   this.route('not-found', { path: '/*path' })
 });

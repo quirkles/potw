@@ -1,28 +1,19 @@
 <div class="games">
   <div class="grid-container">
     <div class="grid-x grid-padding-x">
+      <div class="small-12 medium-4 cell">
+        <h1>
+          GAMES
+        </h1>
+      </div>
+      <div class="small-12 medium-8 cell">
+        <ul class="menu">
+          <li><LinkTo @route="admin.games.list" href="#">Games List</LinkTo></li>
+          <li><LinkTo @route="admin.games.new" href="#">Create Game</LinkTo></li>
+        </ul>
+      </div>
       <div class="small-12 cell">
-        <h1>GAMES</h1>
-      </div>
-      <div class="medium-7 cell">
-        <Panel @title="My games">
-          <div>
-            {{#if this.model.existingGames.length}}
-              games list
-            {{else}}
-              <h2>You aren't in any games right now!</h2>
-              <br>
-              <button class="hollow button success button-large">Create Game</button>
-            {{/if}}
-          </div>
-        </Panel>
-      </div>
-      <div class="medium-5 cell">
-        <Panel @title="Create new game">
-          <div>
-            new game form
-          </div>
-        </Panel>
+        {{outlet}}
       </div>
     </div>
   </div>

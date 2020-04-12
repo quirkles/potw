@@ -1,9 +1,9 @@
 import Model, { attr } from '@ember-data/model';
 
+import { apiHostname } from './consts'
+
 // eslint-disable-next-line no-useless-escape
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-const host = 'http://localhost:5000';
 
 const handleResponse = response => {
   if (response.ok && response.status && response.status < 400 && response.status >= 200) {
@@ -25,7 +25,7 @@ export default class user extends Model {
   @attr userRole;
 
   attemptLogin() {
-    return fetch(`${host}/login`, {
+    return fetch(`${apiHostname}/login`, {
       method: 'POST',
       mode: 'cors',
       credentials: 'same-origin',

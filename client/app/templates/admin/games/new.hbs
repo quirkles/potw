@@ -1,0 +1,21 @@
+<Panel @title="My games">
+  <div>
+    {{#if this.model.existingGames.length}}
+      games list
+    {{else}}
+      <h2>Create New game</h2>
+      <br>
+      <form>
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            <div class="medium-8 cell">
+              <label>Name of the game:
+                <Input @type="text" @value={{@model.name}} placeholder="my game" />
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+    {{/if}}
+  </div>
+</Panel>
