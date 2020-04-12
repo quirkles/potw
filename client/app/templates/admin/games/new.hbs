@@ -1,4 +1,4 @@
-<Panel @title="My games">
+<Panel @title="My games" @variant="app-purple">
   <div>
     {{#if this.model.existingGames.length}}
       games list
@@ -9,7 +9,12 @@
         <div class="grid-container">
           <div class="grid-x grid-padding-x">
             <div class="medium-8 cell">
-              <label>Name of the game:
+              <label>Give the game a name:
+                <Input @type="text" @value={{@model.name}} placeholder="my game" />
+              </label>
+            </div>
+            <div class="medium-8 cell">
+              <label>Add players:
                 <Input @type="text" @value={{@model.name}} placeholder="my game" />
               </label>
             </div>

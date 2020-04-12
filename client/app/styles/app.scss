@@ -20,6 +20,11 @@ html {
   body {
     height: 100%;
     &.ember-application {
+      .heading {
+        border-top: 2rem solid get-color(primary);
+        padding: 1rem 3rem 0.5rem 0.5rem;
+        background: $white;
+      }
       .button-large {
         padding: 0.85em 1em;
         border-width: 2px;

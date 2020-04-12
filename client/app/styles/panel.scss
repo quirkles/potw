@@ -1,5 +1,19 @@
-.app-panel{
+.app-panel {
+  border: none;
+
   h2 {
     max-width: fit-content;
+  }
+  @each $name, $hex in $foundation-palette {
+    &.#{$name} {
+      .card-divider {
+        background: $hex;
+        color: color-pick-contrast($hex, $foundation-colors)
+      }
+
+      .card-section {
+        border-bottom: 0.5rem solid $hex;
+      }
+    }
   }
 }

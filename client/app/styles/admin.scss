@@ -1,15 +1,10 @@
 #admin-page {
-  background: url(../assets/img/cell.png);
+  background: url(../assets/img/jellyfish.png);
   display: flex;
 
   .admin-content-wrapper {
     flex-grow: 1;
     padding: 1rem 0;
-
-    h1 {
-      padding: 1rem 5rem 0.5rem 0.5rem;
-      background: $white;
-    }
 
     .menu {
       background: $white;

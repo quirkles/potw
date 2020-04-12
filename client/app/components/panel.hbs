@@ -1,7 +1,9 @@
-<div class="app-panel card">
+<div class="app-panel card {{if @variant @variant "primary"}}">
   {{#if @title}}
     <div class="card-divider">
-      {{@title}}
+      <h4>
+        {{@title}}
+      </h4>
     </div>
   {{/if}}
   <div class="card-section">
